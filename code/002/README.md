@@ -1,4 +1,4 @@
 # Code for blog 002
 
 ## Use case
-"Simple data type" application written in Python and Go.
+Introduction to simple data types and variables in Python and Go.
