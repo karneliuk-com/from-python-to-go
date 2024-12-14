@@ -1,4 +1,4 @@
-"""From Python to Go: Python: 005 - Dictionaries and Maps"""
+"""From Python to Go: Python: 006 - Dictionaries and Maps"""
 
 # Variables
 inventory = [

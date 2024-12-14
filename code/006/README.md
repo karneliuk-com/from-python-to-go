@@ -1,7 +1,7 @@
-# Code for blog 0046
+# Code for blog 006
 
 ## Use case
-Overview of dictionaries/maps in Python and slices in Go
+Overview of dictionaries in Python and maps in Go
 
 Create environment variables first:
 ```bash

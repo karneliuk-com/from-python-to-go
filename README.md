@@ -11,3 +11,4 @@ Practical guide for infratructure (compute, network, storage, platform) engineer
 | [From Python to Go 004. Array, Lists, Slices.](https://bit.ly/4fZstAs) | Overview of list/slices and operations with them | [004](https://github.com/karneliuk-com/from-python-to-go/tree/main/code/004) |
 | [From Python to Go 005. Code flow control: loops and and conditions.](https://bit.ly/4ipT4sy) | Overview of loops and conditionals to control code flow execution | [005](https://github.com/karneliuk-com/from-python-to-go/tree/main/code/005) |
 | [From Python to Go 006. Dictionaries and Maps.](https://bit.ly/3VvOgYz) | Overview of dictionaries/maps and operations with them | [006](https://github.com/karneliuk-com/from-python-to-go/tree/main/code/006) |
+| [From Python to Go 007.(Data)Classes, Structs, and Custom Data Types.](https://bit.ly/3VE26sb) | Overview of structured strict-typed data | [007](https://github.com/karneliuk-com/from-python-to-go/tree/main/code/007) |
