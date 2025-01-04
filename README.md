@@ -13,3 +13,4 @@ Practical guide for infratructure (compute, network, storage, platform) engineer
 | [From Python to Go 006. Dictionaries and Maps.](https://bit.ly/3VvOgYz) | Overview of dictionaries/maps and operations with them | [006](https://github.com/karneliuk-com/from-python-to-go/tree/main/code/006) |
 | [From Python to Go 007.(Data)Classes, Structs, and Custom Data Types.](https://bit.ly/3VE26sb) | Overview of structured strict-typed data | [007](https://github.com/karneliuk-com/from-python-to-go/tree/main/code/007) |
 | [From Python to Go 008. Object Oriented Programming Or Build Your Own Network Switch.](https://bit.ly/3DpZmbB) | Overview of object-oriented programming | [008](https://github.com/karneliuk-com/from-python-to-go/tree/main/code/008) |
+| [From Python to Go 009. Interfaces For Data Types in Go (Golang).](https://bit.ly/4fMOy4P) | Overview of interfaces data types | [009](https://github.com/karneliuk-com/from-python-to-go/tree/main/code/009) |
