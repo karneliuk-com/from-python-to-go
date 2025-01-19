@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <devices>
+        <name>leaf-01</name>
+        <os>cisco-nxos</os>
+        <ip>192.168.1.1</ip>
+        <port>22</port>
+        <latitude>51.5120898</latitude>
+        <longitude>-0.0030987</longitude>
+        <active>true</active>
+    </devices>
+    <devices>
+        <name>leaf-02</name>
+        <os>arista-eos</os>
+        <ip>192.168.1.2</ip>
+        <port>830</port>
+        <latitude>51.5120427</latitude>
+        <longitude>-0.0044585</longitude>
+        <active>true</active>
+    </devices>
+    <devices>
+        <name>spine-01</name>
+        <ip>192.168.1.11</ip>
+        <port>22</port>
+        <latitude>51.5112179</latitude>
+        <longitude>-0.0048555</longitude>
+        <active>false</active>
+    </devices>
+</root>

@@ -14,4 +14,5 @@ Practical guide for infratructure (compute, network, storage, platform) engineer
 | [From Python to Go 007.(Data)Classes, Structs, and Custom Data Types.](https://bit.ly/3VE26sb) | Overview of structured strict-typed data | [007](https://github.com/karneliuk-com/from-python-to-go/tree/main/code/007) |
 | [From Python to Go 008. Object Oriented Programming Or Build Your Own Network Switch.](https://bit.ly/3DpZmbB) | Overview of object-oriented programming | [008](https://github.com/karneliuk-com/from-python-to-go/tree/main/code/008) |
 | [From Python to Go 009. Interfaces For Data Types in Go (Golang).](https://bit.ly/4fMOy4P) | Overview of interfaces data types | [009](https://github.com/karneliuk-com/from-python-to-go/tree/main/code/009) |
-| [From Python to Go 009. Reading/writing Files.](https://bit.ly/4jryQ2b) | Interaction with text files | [010](https://github.com/karneliuk-com/from-python-to-go/tree/main/code/010) |
+| [From Python to Go 010. Reading/writing Files.](https://bit.ly/4jryQ2b) | Interaction with text files | [010](https://github.com/karneliuk-com/from-python-to-go/tree/main/code/010) |
+| [From Python to Go 011. Parsing XML/JSON/YAML files.](https://bit.ly/3DW6M6w) | Parsing XML, JSON and YAML serialization | [011](https://github.com/karneliuk-com/from-python-to-go/tree/main/code/011) |
