@@ -1,0 +1,22 @@
+---
+- hostname: leaf1
+  interfaces:
+    - name: Ethernet1
+      description: link to leaf2 Ethernet1
+      enabled: true
+      ip4:
+        address: 10.0.0.0
+        prefix: 31
+    - name: Ethernet2
+      description: link to spine1 Ethernet1
+      enabled: true
+      ip4:
+- hostname: leaf2
+  interfaces:
+    - name: Ethernet1
+      description: link to leaf1 Ethernet1
+      enabled: true
+      ip4:
+        address: 10.0.01
+        prefix: 31
+    - name: Ethernet2

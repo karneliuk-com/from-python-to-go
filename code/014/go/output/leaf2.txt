@@ -1,0 +1,12 @@
+hostname leaf2
+!
+interface Ethernet1
+  description "link to leaf1 Ethernet1"
+  no shutdown
+  no switchport
+  ip address 10.0.01/31
+!
+interface Ethernet2
+  shutdown
+  switchport
+!

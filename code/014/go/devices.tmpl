@@ -1,0 +1,24 @@
+{{- if .Hostname -}}
+hostname {{ .Hostname }}
+!
+{{- end }}
+{{- if .Interfaces }}
+{{- range .Interfaces }}
+interface {{ .Name }}
+{{- if .Description }}
+  description "{{ .Description }}"
+{{- end }}
+{{- if .Enabled }}
+  no shutdown
+{{- else }}
+  shutdown
+{{- end }}
+{{- if .IP4.Address }}
+  no switchport
+  ip address {{ .IP4.Address }}/{{ .IP4.Prefix }}
+{{- else }}
+  switchport
+{{- end }}
+!
+{{- end -}}
+{{- end }}

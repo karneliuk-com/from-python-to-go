@@ -18,3 +18,4 @@ Practical guide for infratructure (compute, network, storage, platform) engineer
 | [From Python to Go 011. Parsing XML/JSON/YAML files.](https://bit.ly/3DW6M6w) | Parsing XML, JSON and YAML serialization | [011](https://github.com/karneliuk-com/from-python-to-go/tree/main/code/011) |
 | [From Python to Go 012. Processing user input.](https://bit.ly/42to8lF) | Reading user input from standard input and from CLI arguments. | [012](https://github.com/karneliuk-com/from-python-to-go/tree/main/code/012) |
 | [From Python to Go 013. Error Handling.](https://bit.ly/40WszUE) | How to process Errors during execution. | [013](https://github.com/karneliuk-com/from-python-to-go/tree/main/code/013) |
+| [From Python to Go 014. Templating configuration files.](https://bit.ly/4aTqFro) | How to template devices configuration. | [014](https://github.com/karneliuk-com/from-python-to-go/tree/main/code/014) |

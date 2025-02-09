@@ -1,0 +1,24 @@
+{%- if device.hostname -%}
+hostname {{ device.hostname }}
+!
+{%- endif %}
+{%- if device.interfaces -%}
+{% for interface in device.interfaces %}
+interface {{ interface.name }}
+{%- if interface.description %}
+  description "{{ interface.description }}"
+{%- endif %}
+{%- if interface.enabled %}
+  no shutdown
+{%- else %}
+  shutdown
+{%- endif %}
+{%- if interface.ip4 %}
+  no switchport
+  ip address {{ interface.ip4.address }}/{{ interface.ip4.prefix }}
+{%- else %}
+  switchport
+{%- endif %}
+!
+{%- endfor %}
+{%- endif %}
