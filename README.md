@@ -19,3 +19,4 @@ Practical guide for infratructure (compute, network, storage, platform) engineer
 | [From Python to Go 012. Processing user input.](https://bit.ly/42to8lF) | Reading user input from standard input and from CLI arguments. | [012](https://github.com/karneliuk-com/from-python-to-go/tree/main/code/012) |
 | [From Python to Go 013. Error Handling.](https://bit.ly/40WszUE) | How to process Errors during execution. | [013](https://github.com/karneliuk-com/from-python-to-go/tree/main/code/013) |
 | [From Python to Go 014. Templating configuration files.](https://bit.ly/4aTqFro) | How to template devices configuration. | [014](https://github.com/karneliuk-com/from-python-to-go/tree/main/code/014) |
+| [From Python to Go 015. Basic SSH interactions.](https://) | How to template devices configuration. | [015](https://github.com/karneliuk-com/from-python-to-go/tree/main/code/015) |
