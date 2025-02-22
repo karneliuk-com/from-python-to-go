@@ -61,7 +61,6 @@ func (d *Device) executeCommand(c string) {
 		Auth:            []ssh.AuthMethod{interactiveAuth},
 		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
 	}
-	fmt.Printf("%+v\n", *sshClientConfig)
 	sshClient, err := ssh.Dial("tcp", fmt.Sprintf("%v:22", (*d).IpAddress), sshClientConfig)
 	if err != nil {
 		log.Fatalln("Failed to dial: ", err)

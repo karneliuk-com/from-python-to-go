@@ -61,11 +61,9 @@ class Device:
         session.send(command + "\n")
         output = ""
         regex = re.compile(rf"{self.hostname}[#>]", flags=re.MULTILINE)
-        print(f"{regex=}")
         while not regex.search(output):
             time.sleep(.1)
             output += session.recv(65535).decode("utf-8")
-            print(output)
 
         # Store the result
         self.results.append(Result(command, output, datetime.datetime.now()))
