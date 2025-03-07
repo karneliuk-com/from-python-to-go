@@ -1,0 +1,4 @@
+---
+- hostname: dev-pygnmi-eos-001
+  ip_address: 192.168.51.79
+  platform: arista_eos
