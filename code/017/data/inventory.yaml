@@ -1,0 +1,4 @@
+---
+- hostname: go-blog-nexus
+  ip_address: 192.168.51.79
+  platform: cisco_nxos
