@@ -85,28 +85,30 @@ $ go get github.com/scrapli/scrapligo
 Execution result:
 ```bash
 $ go run . -i ../data/inventory.yaml
-Config: {{http://openconfig.net/yang/interfaces interfaces} [{Loopback 23 {Loopback 23 Test-netconf-golang-2}}]}
+Config: {{http://openconfig.net/yang/interfaces interfaces} [{Loopback 23 {Loopback 23 Test-netconf-golang-2 true}}]}
 Impact:   main.RPCResponse{
         XMLName: {Space: "urn:ietf:params:xml:ns:netconf:base:1.0", Local: "rpc-reply"},
         Data: struct{ Interfaces main.OpenConfigInterfaces }{
                 Interfaces: main.OpenConfigInterfaces{
                         XMLName: {Space: "http://openconfig.net/yang/interfaces", Local: "interfaces"},
                         Interface: []main.OpenConfigInterface{
-                                {Name: "Management1", Config: {Name: "Management1"}},
-                                {Name: "Ethernet2", Config: {Name: "Ethernet2"}},
-                                {Name: "Ethernet1", Config: {Name: "Ethernet1"}},
+                                {Name: "Management1", Config: {Name: "Management1", Enabled: true}},
+                                {Name: "Ethernet2", Config: {Name: "Ethernet2", Enabled: true}},
+                                {Name: "Ethernet1", Config: {Name: "Ethernet1", Enabled: true}},
                                 {
                                         Name: "Loopback23",
-                                        Config: struct{ Name string "xml:\"name,omitempty\""; Description string "xml:\"description,omitempty\"" }{
+                                        Config: struct{ Name string "xml:\"name,omitempty\""; Description string "xml:\"description,omitempty\""; Enabled bool "xml:\"enabled\"" }{
                                                 Name:        "Loopback23",
 -                                               Description: "Test-netconf-python-2",
 +                                               Description: "Test-netconf-golang-2",
+                                                Enabled:     true,
                                         },
                                 },
-                                {Name: "Loopback0", Config: {Name: "Loopback0"}},
+                                {Name: "Loopback0", Config: {Name: "Loopback0", Enabled: true}},
                                 {Name: "Loopback51", Config: {Name: "Loopback51", Description: "pytest-update-test-33"}},
                         },
                 },
         },
   }
+Timestamp: 2025-03-22 18:28:01.696317104 +0000 GMT m=+2.236461044
 ```
