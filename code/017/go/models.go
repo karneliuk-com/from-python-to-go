@@ -17,7 +17,6 @@ type OpenConfigInterface struct {
 }
 type OpenConfigInterfaces struct {
 	XMLName   xml.Name              `xml:"interfaces"`
-	XMLNS     string                `xml:"xmlns,attr"`
 	Interface []OpenConfigInterface `xml:"interface,omitempty"`
 }
 

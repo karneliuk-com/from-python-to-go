@@ -189,10 +189,16 @@ func main() {
 	// Config
 	instruction := Instruction{
 		Command: OpenConfigInterfaces{
-			XMLNS: "http://openconfig.net/yang/interfaces",
+			XMLName: xml.Name{
+				Space: "http://openconfig.net/yang/interfaces",
+				Local: "interfaces",
+			},
 		},
 		Config: OpenConfigInterfaces{
-			XMLNS:     "http://openconfig.net/yang/interfaces",
+			XMLName: xml.Name{
+				Space: "http://openconfig.net/yang/interfaces",
+				Local: "interfaces",
+			},
 			Interface: make([]OpenConfigInterface, 0),
 		},
 	}
