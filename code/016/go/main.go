@@ -1,4 +1,4 @@
-/* From Python to Go: Go: 015 - Basic SSH. */
+/* From Python to Go: Go: 016 - Advanced SSH. */
 
 package main
 

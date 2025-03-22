@@ -1,4 +1,4 @@
-module karneliuk.com/go/016
+module karneliuk.com/go/017
 
 go 1.23.2
 

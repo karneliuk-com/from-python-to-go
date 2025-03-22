@@ -1,22 +1,21 @@
-/* From Python to Go: Go: 015 - Basic SSH. */
+/* From Python to Go: Go: 017 - NETCONF. */
 
 package main
 
+// Imports
 import (
+	"encoding/xml"
 	"flag"
 	"fmt"
 	"log"
 	"os"
-	"strings"
 	"time"
 
 	"github.com/google/go-cmp/cmp"
+	"github.com/scrapli/scrapligo/driver/netconf"
 	"github.com/scrapli/scrapligo/driver/options"
-	"github.com/scrapli/scrapligo/platform"
 	"gopkg.in/yaml.v3"
 )
-
-// Imports
 
 // Types and Receivers
 type Arguments struct {
@@ -31,8 +30,8 @@ type Crendetials struct {
 }
 
 type Instruction struct {
-	Command string
-	Config  []string
+	Command OpenConfigInterfaces
+	Config  OpenConfigInterfaces
 }
 
 type Result struct {
@@ -54,20 +53,19 @@ type Device struct {
 func (d *Device) executeChange(i Instruction) {
 	/* Method to execute command */
 
-	// Get platform
-	p, err := platform.NewPlatform(
-		(*d).Platform,
+	// Create XML for filter
+	// xmlCommandFilter, err := xml.Marshal(i.Command)
+	// if err != nil {
+	// 	log.Fatalln("Cannot create XML message ", err)
+	// }
+
+	// Get netowrk driver
+	dr, err := netconf.NewDriver(
 		(*d).IpAddress,
 		options.WithAuthNoStrictKey(),
 		options.WithAuthUsername(d.Crendetials.Username),
 		options.WithAuthPassword(d.Crendetials.Password),
 	)
-	if err != nil {
-		log.Fatalln("failed to create platform; error: ", err)
-	}
-
-	// Get netowrk driver
-	dr, err := p.GetNetworkDriver()
 	if err != nil {
 		log.Fatalln("failed to fetch network driver from the platform; error ", err)
 	}
@@ -80,25 +78,50 @@ func (d *Device) executeChange(i Instruction) {
 	defer dr.Close()
 
 	// Get change before start
-	before, err := dr.SendCommand(i.Command)
+	before, err := dr.GetConfig("running")
 	if err != nil {
 		log.Fatalln("failed to send command; error: ", err)
+	}
+	beforeStruct := RPCResponse{}
+	err = xml.Unmarshal((*before).RawResult, &beforeStruct)
+	if err != nil {
+		log.Panic("Cannot parse received response: ", err)
 	}
 
 	// Apply change
-	_, err = dr.SendConfigs(i.Config)
+	configXmlBs, err := xml.Marshal(i.Config)
+	if err != nil {
+		log.Fatalln("Cannot convert config to XML: ", err)
+	}
+	configXmlStr := "<config>" + string(configXmlBs) + "</config>"
+
+	changeResponse, err := dr.EditConfig("candidate", configXmlStr)
 	if err != nil {
 		log.Fatalln("failed to send config; error: ", err)
+	} else if changeResponse.Failed != nil {
+		log.Fatalln("Return error from device during config; error: ", err)
+	}
+
+	commitResponse, err := dr.Commit()
+	if err != nil {
+		log.Fatalln("failed to commit config; error: ", err)
+	} else if commitResponse.Failed != nil {
+		log.Fatalln("return error from device during commit; error: ", err)
 	}
 
 	// Get state after change
-	after, err := dr.SendCommand(i.Command)
+	after, err := dr.GetConfig("running")
 	if err != nil {
 		log.Fatalln("failed to send command; error: ", err)
 	}
+	afterStruct := RPCResponse{}
+	err = xml.Unmarshal((*after).RawResult, &afterStruct)
+	if err != nil {
+		log.Panic("Cannot parse received response: ", err)
+	}
 
 	// Diff
-	diff := cmp.Diff(strings.Split(before.Result, "\n"), strings.Split(after.Result, "\n"))
+	diff := cmp.Diff(beforeStruct, afterStruct)
 
 	// Update the result
 	(*d).Result = append((*d).Result, Result{
@@ -165,12 +188,24 @@ func main() {
 
 	// Config
 	instruction := Instruction{
-		Command: "show interfaces description",
-		Config: []string{
-			"interface Loopback 23",
-			"description Go_Test_2",
+		Command: OpenConfigInterfaces{
+			XMLNS: "http://openconfig.net/yang/interfaces",
+		},
+		Config: OpenConfigInterfaces{
+			XMLNS:     "http://openconfig.net/yang/interfaces",
+			Interface: make([]OpenConfigInterface, 0),
 		},
 	}
+	instruction.Config.Interface = append(instruction.Config.Interface, OpenConfigInterface{
+		Name: "Loopback 23",
+		Config: struct {
+			Name        string "xml:\"name,omitempty\""
+			Description string "xml:\"description,omitempty\""
+		}{
+			Name:        "Loopback 23",
+			Description: "Test-netconf-golang-2",
+		},
+	})
 
 	// Execute commands
 	for i := 0; i < len(*inventory); i++ {
