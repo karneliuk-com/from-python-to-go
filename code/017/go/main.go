@@ -31,7 +31,7 @@ type Crendetials struct {
 
 type Instruction struct {
 	Command OpenConfigInterfaces
-	Config  OpenConfigInterfaces
+	Config  NetconfConfig
 }
 
 type Result struct {
@@ -52,12 +52,6 @@ type Device struct {
 
 func (d *Device) executeChange(i Instruction) {
 	/* Method to execute command */
-
-	// Create XML for filter
-	// xmlCommandFilter, err := xml.Marshal(i.Command)
-	// if err != nil {
-	// 	log.Fatalln("Cannot create XML message ", err)
-	// }
 
 	// Get netowrk driver
 	dr, err := netconf.NewDriver(
@@ -93,7 +87,7 @@ func (d *Device) executeChange(i Instruction) {
 	if err != nil {
 		log.Fatalln("Cannot convert config to XML: ", err)
 	}
-	configXmlStr := "<config>" + string(configXmlBs) + "</config>"
+	configXmlStr := string(configXmlBs)
 
 	changeResponse, err := dr.EditConfig("candidate", configXmlStr)
 	if err != nil {
@@ -194,19 +188,22 @@ func main() {
 				Local: "interfaces",
 			},
 		},
-		Config: OpenConfigInterfaces{
-			XMLName: xml.Name{
-				Space: "http://openconfig.net/yang/interfaces",
-				Local: "interfaces",
+		Config: NetconfConfig{
+			Interfaces: OpenConfigInterfaces{
+				XMLName: xml.Name{
+					Space: "http://openconfig.net/yang/interfaces",
+					Local: "interfaces",
+				},
+				Interface: make([]OpenConfigInterface, 0),
 			},
-			Interface: make([]OpenConfigInterface, 0),
 		},
 	}
-	instruction.Config.Interface = append(instruction.Config.Interface, OpenConfigInterface{
+	instruction.Config.Interfaces.Interface = append(instruction.Config.Interfaces.Interface, OpenConfigInterface{
 		Name: "Loopback 23",
 		Config: struct {
 			Name        string "xml:\"name,omitempty\""
 			Description string "xml:\"description,omitempty\""
+			Enabled     bool   "xml:\"enabled,omitempty\""
 		}{
 			Name:        "Loopback 23",
 			Description: "Test-netconf-golang-2",
