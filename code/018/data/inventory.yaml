@@ -1,4 +1,5 @@
 ---
 - hostname: go-blog-arista
   ip_address: 192.168.51.79
+  port: 6030
   platform: arista_eos
