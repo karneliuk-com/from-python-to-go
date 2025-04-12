@@ -14,7 +14,7 @@ Extra dependencies are required.
 ### Python
 Requirements:
 ```Bash
-$ pip install pyyaml pygnmi httpx
+$ pip install pygnmi httpx
 ```
 
 Execution result:
