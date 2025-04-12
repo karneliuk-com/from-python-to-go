@@ -6,11 +6,11 @@ import datetime
 import os
 import sys
 from dataclasses import dataclass
-from typing import List
+from typing import List, Tuple
 import difflib
 import pygnmi.client
 import yaml
-import pygnmi
+import httpx
 
 
 # Classes
@@ -19,6 +19,13 @@ class Credentials:
     """Class to store credentials."""
     username: str
     password: str
+
+
+@dataclass
+class InventoryCredentials:
+    """Class to store credentials."""
+    url: str
+    token: str
 
 
 @dataclass
@@ -111,49 +118,65 @@ class Device:
 
 
 # Functions
-def read_args() -> argparse.Namespace:
-    """Helper function to read CLI arguments."""
-    parser = argparse.ArgumentParser(description="User input.")
-    parser.add_argument("-i", "--inventory", type=str, help="Path to inventory file.")
-    return parser.parse_args()
-
-
-def load_inventory(filename: str, credentials: Credentials) -> List[Device]:
+def load_inventory(inventory: InventoryCredentials, credentials: Credentials) -> List[Device]:
     """Function to load inventory data."""
-    # Open file
+    # Create HTTP client and set headers
+    hclient = httpx.Client(
+        base_url=inventory.url.rstrip("/"),
+        headers={"Authorization": f"Token {inventory.token}"},
+    )
+    # Retrieve data from REST API
     try:
-        with open(filename, "r", encoding="utf-8") as f:
-            data = yaml.safe_load(f)
+        response = hclient.get(
+            "/api/dcim/devices/",
+            params={
+                "site": "kblog",
+            }
+        )
+        response.raise_for_status()
+        data = response.json()
 
-    except FileNotFoundError as e:
+    except Exception as e:
         print(e)
         sys.exit(1)
 
     # Populate list of devices
     result = []
-    for device in data:
-        result.append(Device(credentials=credentials, **device))
+    for device in data["results"]:
+        result.append(
+            Device(
+                hostname=device["name"],
+                ip_address=device["primary_ip"]["address"].split("/")[0],
+                port=device["custom_fields"].get("gnmi_port", 50051),
+                platform=device["platform"]["slug"],
+                credentials=credentials,
+            )
+        )
 
     return result
 
 
-def get_credentials() -> Credentials:
+def get_credentials() -> Tuple[Credentials, InventoryCredentials]:
     """Function to get credentials."""
-    username = os.getenv("AUTOMATION_USER")
-    password = os.getenv("AUTOMATION_PASS")
-    return Credentials(username, password)
+    return (
+        Credentials(
+            os.getenv("AUTOMATION_USER"),
+            os.getenv("AUTOMATION_PASS"),
+        ),
+        InventoryCredentials(
+            os.getenv("AUTOMATION_INVENTORY_URL"),
+            os.getenv("AUTOMATION_INVENTORY_TOKEN"),
+        ),
+    )
 
 
 # Main code
 if __name__ == "__main__":
-    # Read CLI arguments
-    args = read_args()
-
     # Get credentials
-    credentials = get_credentials()
+    credentials, inventory_credentials = get_credentials()
 
     # Load inventory
-    devices = load_inventory(args.inventory, credentials=credentials)
+    devices = load_inventory(inventory_credentials, credentials=credentials)
 
     # Config
     instruction = Instruction(
