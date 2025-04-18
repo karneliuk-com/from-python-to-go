@@ -1,4 +1,4 @@
-/* From Python to Go: Go: 018 - GNMI: modules */
+/* From Python to Go: Go: 019 - REST API and GNMI: modules */
 
 package main
 
