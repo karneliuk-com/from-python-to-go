@@ -1,7 +1,6 @@
-"""From Python to Go: Python: 017 - NETCONF."""
+"""From Python to Go: Python: 019 - REST API and GNMI."""
 
 # Modules
-import argparse
 import datetime
 import os
 import sys
@@ -9,7 +8,6 @@ from dataclasses import dataclass
 from typing import List, Tuple
 import difflib
 import pygnmi.client
-import yaml
 import httpx
 
 
