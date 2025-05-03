@@ -24,4 +24,4 @@ Practical guide for infratructure (compute, network, storage, platform) engineer
 | [From Python to Go 017. NETCONF.](https://bit.ly/41PN4BU) | How to interact with device using NETCONF. | [017](https://github.com/karneliuk-com/from-python-to-go/tree/main/code/017) |
 | [From Python to Go 018. GNMI.](https://bit.ly/3XIz4bR) | How to interact with device using GNMI. | [018](https://github.com/karneliuk-com/from-python-to-go/tree/main/code/018) |
 | [From Python to Go 019. REST API.](https://bit.ly/4lIiDH0) | How to interact with applications via REST API. | [019](https://github.com/karneliuk-com/from-python-to-go/tree/main/code/019) |
-| [From Python to Go 020. Concurency.](https://) | How to handle managing of multiple network devices and services simultaneously. | [020](https://github.com/karneliuk-com/from-python-to-go/tree/main/code/020) |
+| [From Python to Go 020. Concurency.](https://bit.ly/3RMlwIU) | How to handle managing of multiple network devices and services simultaneously. | [020](https://github.com/karneliuk-com/from-python-to-go/tree/main/code/020) |
